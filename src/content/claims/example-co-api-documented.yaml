@@ -1,0 +1,7 @@
+component: example-co-public-api
+statement: "Fictional demo claim: Example Public API accepts HTTP requests from Example Web Client."
+status: documented
+confidence: high
+asOf: "2026-01"
+sources:
+  - example-co-architecture-notes

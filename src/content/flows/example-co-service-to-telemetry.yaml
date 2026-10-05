@@ -1,0 +1,4 @@
+from: example-co-order-service
+to: example-co-telemetry
+data: operational signal
+mode: async

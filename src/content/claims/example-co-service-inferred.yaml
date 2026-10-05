@@ -1,0 +1,6 @@
+component: example-co-order-service
+statement: "Fictional demo claim: Example Order Service coordinates order processing for the API."
+status: inferred
+confidence: medium
+asOf: "2026-02"
+rationale: "Fictional demo inference used to demonstrate an inferred-only component."

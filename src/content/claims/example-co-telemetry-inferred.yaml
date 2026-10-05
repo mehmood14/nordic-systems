@@ -1,0 +1,6 @@
+component: example-co-telemetry
+statement: "Fictional demo claim: Example Telemetry groups signals for operational review."
+status: inferred
+confidence: medium
+asOf: "2026-03"
+rationale: "Fictional demo inference used to provide a second monitoring claim."

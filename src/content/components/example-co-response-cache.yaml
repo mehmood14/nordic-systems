@@ -1,0 +1,5 @@
+company: example-co
+name: Example Response Cache
+layer: cache
+summary: "Fictional demo component: a cache for frequently requested example responses."
+why: "It lets the fictional API avoid repeated work for common reads."

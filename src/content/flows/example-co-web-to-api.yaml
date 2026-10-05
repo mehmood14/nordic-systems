@@ -1,0 +1,8 @@
+from: example-co-web-client
+to: example-co-public-api
+data: example request
+mode: sync
+protocol: HTTPS
+claims:
+  - example-co-web-client-documented
+  - example-co-api-documented

@@ -1,0 +1,5 @@
+company: example-co
+name: Example Public API
+layer: api
+summary: "Fictional demo component: an HTTP API that receives client requests."
+why: "It gives the fictional demo a stable boundary between the client and backend services."

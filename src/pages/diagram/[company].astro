@@ -1,0 +1,116 @@
+---
+import { getCollection } from 'astro:content';
+import ArchitectureDiagram, {
+  type DiagramClaim,
+  type DiagramEdgeData,
+  type DiagramGraph,
+  type DiagramNodeData,
+  type DiagramSource,
+} from '../../components/ArchitectureDiagram';
+
+export async function getStaticPaths() {
+  const [sources, components, claims, flows, scenarios] = await Promise.all([
+    getCollection('sources'),
+    getCollection('components'),
+    getCollection('claims'),
+    getCollection('flows'),
+    getCollection('scenarios'),
+  ]);
+  const companies = new Set([
+    ...sources.map((entry) => entry.data.company),
+    ...components.map((entry) => entry.data.company),
+    ...scenarios.map((entry) => entry.data.company),
+  ]);
+
+  if (!import.meta.env.DEV) companies.delete('example-co');
+
+  return [...companies].map((company) => ({ params: { company } }));
+}
+
+const { company } = Astro.params;
+const [sources, components, claims, flows] = await Promise.all([
+  getCollection('sources'),
+  getCollection('components'),
+  getCollection('claims'),
+  getCollection('flows'),
+]);
+
+const sourceById = new Map(sources.map((source) => [source.id, source]));
+const companyComponents = components.filter((component) => component.data.company === company);
+const componentIds = new Set(companyComponents.map((component) => component.id));
+const companyClaims = claims.filter((claim) => componentIds.has(claim.data.component.id));
+const claimsByComponent = new Map<string, DiagramClaim[]>();
+const claimById = new Map<string, DiagramClaim>();
+
+for (const claim of companyClaims) {
+  const diagramClaim: DiagramClaim = {
+    id: claim.id,
+    statement: claim.data.statement,
+    status: claim.data.status,
+    confidence: claim.data.confidence,
+    asOf: claim.data.asOf,
+    rationale: claim.data.rationale,
+    sources: claim.data.sources.flatMap((reference) => {
+      const source = sourceById.get(reference.id);
+      const sourceData: DiagramSource | undefined = source && {
+        id: source.id,
+        title: source.data.title,
+        url: source.data.url,
+        publishedAt: source.data.publishedAt,
+      };
+      return sourceData ? [sourceData] : [];
+    }),
+  };
+  claimById.set(claim.id, diagramClaim);
+  claimsByComponent.set(claim.data.component.id, [
+    ...(claimsByComponent.get(claim.data.component.id) ?? []),
+    diagramClaim,
+  ]);
+}
+
+const diagramNodes: DiagramNodeData[] = companyComponents.map((component) => ({
+  id: component.id,
+  name: component.data.name,
+  layer: component.data.layer,
+  summary: component.data.summary,
+  why: component.data.why,
+  claims: claimsByComponent.get(component.id) ?? [],
+}));
+
+const diagramEdges: DiagramEdgeData[] = flows
+  .filter((flow) => componentIds.has(flow.data.from.id) && componentIds.has(flow.data.to.id))
+  .map((flow) => ({
+    id: flow.id,
+    from: flow.data.from.id,
+    to: flow.data.to.id,
+    data: flow.data.data,
+    mode: flow.data.mode,
+    protocol: flow.data.protocol,
+    claims: flow.data.claims.flatMap((reference) => {
+      const claim = claimById.get(reference.id);
+      return claim ? [claim] : [];
+    }),
+  }));
+
+const graph: DiagramGraph = { company: company ?? '', nodes: diagramNodes, edges: diagramEdges };
+const title = `${company ?? 'Company'} architecture diagram | Nordic Systems`;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-slate-50 text-slate-950">
+    <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <header class="mb-6 max-w-3xl">
+        <p class="text-sm font-semibold tracking-wide text-slate-700">Nordic Systems</p>
+        <h1 class="mt-2 text-3xl font-semibold tracking-tight">{company} architecture</h1>
+        <p class="mt-3 text-slate-700">Line styles show the weakest provenance status attached to each component or flow. This page distinguishes documented facts from inference and speculation.</p>
+      </header>
+      <ArchitectureDiagram client:only="react" graph={graph} />
+    </main>
+  </body>
+</html>

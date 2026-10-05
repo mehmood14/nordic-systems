@@ -1,0 +1,7 @@
+from: example-co-response-cache
+to: example-co-order-service
+data: cache miss request
+mode: sync
+protocol: internal request
+claims:
+  - example-co-cache-inferred

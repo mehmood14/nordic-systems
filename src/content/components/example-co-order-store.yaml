@@ -1,0 +1,5 @@
+company: example-co
+name: Example Order Store
+layer: data-store
+summary: "Fictional demo component: a durable store for example order records."
+why: "It provides a fictional persistence boundary for order state."

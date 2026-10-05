@@ -1,0 +1,7 @@
+component: example-co-order-store
+statement: "Fictional demo claim: Example Order Store persists example order records."
+status: documented
+confidence: high
+asOf: "2026-01"
+sources:
+  - example-co-architecture-notes

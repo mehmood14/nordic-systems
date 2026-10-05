@@ -1,0 +1,7 @@
+component: example-co-response-cache
+statement: "Fictional demo claim: Example Response Cache stores selected API responses."
+status: documented
+confidence: high
+asOf: "2026-01"
+sources:
+  - example-co-architecture-notes

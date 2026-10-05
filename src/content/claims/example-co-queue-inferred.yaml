@@ -1,0 +1,6 @@
+component: example-co-event-queue
+statement: "Fictional demo claim: Example Event Queue carries events produced by Example Order Service."
+status: inferred
+confidence: medium
+asOf: "2026-02"
+rationale: "Fictional demo inference used to exercise an asynchronous edge."

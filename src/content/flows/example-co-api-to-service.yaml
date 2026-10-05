@@ -1,0 +1,8 @@
+from: example-co-public-api
+to: example-co-order-service
+data: example order command
+mode: sync
+protocol: internal request
+claims:
+  - example-co-api-documented
+  - example-co-service-inferred

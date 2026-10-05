@@ -1,0 +1,5 @@
+company: example-co
+name: Example Telemetry
+layer: monitoring
+summary: "Fictional demo component: a monitoring sink for example service signals."
+why: "It gives the fictional demo a place to collect operational signals."

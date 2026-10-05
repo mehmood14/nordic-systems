@@ -1,0 +1,6 @@
+component: example-co-order-service
+statement: "Fictional demo claim: Example Order Service may retry selected failed work."
+status: speculative
+confidence: low
+asOf: "2026-03"
+rationale: "Fictional demo speculation used to demonstrate the weakest-status rule."

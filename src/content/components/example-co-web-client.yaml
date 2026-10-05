@@ -1,0 +1,5 @@
+company: example-co
+name: Example Web Client
+layer: frontend
+summary: "Fictional demo component: a browser client for Example Co users."
+why: "It provides a fictional entry point for user requests in the demo architecture."

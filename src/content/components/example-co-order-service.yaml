@@ -1,0 +1,5 @@
+company: example-co
+name: Example Order Service
+layer: service
+summary: "Fictional demo component: a service that coordinates example order work."
+why: "It keeps fictional business logic separate from transport and storage concerns."

@@ -1,0 +1,6 @@
+from: example-co-order-service
+to: example-co-event-queue
+data: example order event
+mode: async
+claims:
+  - example-co-queue-inferred

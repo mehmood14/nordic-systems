@@ -1,0 +1,7 @@
+component: example-co-web-client
+statement: "Fictional demo claim: Example Web Client sends requests to Example Public API."
+status: documented
+confidence: high
+asOf: "2026-01"
+sources:
+  - example-co-architecture-notes

@@ -1,0 +1,5 @@
+company: example-co
+name: Example Event Queue
+layer: queue
+summary: "Fictional demo component: an asynchronous queue for example domain events."
+why: "It decouples fictional event producers from downstream processing."

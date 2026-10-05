@@ -1,0 +1,8 @@
+from: example-co-public-api
+to: example-co-response-cache
+data: cached response lookup
+mode: sync
+protocol: internal request
+claims:
+  - example-co-api-inferred
+  - example-co-cache-documented

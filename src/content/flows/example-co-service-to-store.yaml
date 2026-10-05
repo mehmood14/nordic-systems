@@ -1,0 +1,7 @@
+from: example-co-order-service
+to: example-co-order-store
+data: example order record
+mode: sync
+protocol: internal request
+claims:
+  - example-co-store-documented

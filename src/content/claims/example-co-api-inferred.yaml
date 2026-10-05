@@ -1,0 +1,6 @@
+component: example-co-public-api
+statement: "Fictional demo claim: Example Public API checks Example Response Cache before delegating some reads."
+status: inferred
+confidence: medium
+asOf: "2026-02"
+rationale: "Fictional demo inference used to exercise mixed-provenance node styling."

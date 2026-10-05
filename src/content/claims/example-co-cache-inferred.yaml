@@ -1,0 +1,6 @@
+component: example-co-response-cache
+statement: "Fictional demo claim: Example Response Cache may reduce repeated reads for Example Public API."
+status: inferred
+confidence: medium
+asOf: "2026-02"
+rationale: "Fictional demo inference used to demonstrate a mixed-provenance cache."
