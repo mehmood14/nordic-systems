@@ -1,0 +1,5 @@
+company: spotify
+name: Backstage
+layer: platform
+summary: "Spotify's internal developer portal and software catalog."
+why: "It gives developers a central place to discover and understand software ownership and metadata."

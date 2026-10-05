@@ -1,0 +1,7 @@
+component: backstage
+statement: "Spotify renders architecture diagrams automatically from its software catalog metadata in Backstage."
+status: documented
+confidence: high
+asOf: "2022-07"
+sources:
+  - spotify-software-visualization
