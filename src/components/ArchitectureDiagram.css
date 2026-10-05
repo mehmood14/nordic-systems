@@ -9,11 +9,22 @@
 .legend-line--inferred { border-top-style: dashed; }
 .legend-line--speculative { border-top-style: dotted; }
 .diagram-and-panel { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+.scenario-panel { padding: 1rem; border: 1px solid #cbd5e1; border-radius: .5rem; background: white; }
+.scenario-panel h2 { margin: 0; font-size: 1.1rem; }
+.scenario-panel label { display: grid; gap: .35rem; margin-top: .75rem; font-weight: 600; }
+.scenario-panel select { max-width: 32rem; padding: .4rem; border: 1px solid #64748b; border-radius: .25rem; background: white; }
+.scenario-actions { display: flex; gap: .5rem; margin-top: .75rem; }
+.scenario-actions button, .scenario-panel button { border: 1px solid #64748b; border-radius: .25rem; background: white; padding: .35rem .55rem; }
+.scenario-actions button:disabled { opacity: .5; }
+.scenario-note { font-weight: 600; }
 .diagram-canvas { min-height: 38rem; border: 1px solid #cbd5e1; border-radius: .5rem; overflow: hidden; background: #f8fafc; }
 .diagram-loading { padding: 2rem; }
+.diagram-empty { display: grid; place-items: center; }
 .architecture-node { width: 208px; min-height: 92px; border: 3px solid #334155; border-radius: .5rem; background: white; color: #0f172a; }
 .architecture-node--inferred { border-style: dashed; }
 .architecture-node--speculative, .architecture-node--unverified { border-style: dotted; }
+.architecture-node--dimmed { opacity: .28; }
+.architecture-node--active { outline: 4px solid #0f172a; outline-offset: 3px; }
 .architecture-node__button { width: 100%; min-height: 86px; display: flex; align-items: center; gap: .7rem; padding: .85rem; border: 0; background: transparent; color: inherit; text-align: left; }
 .architecture-node .react-flow__handle { width: .65rem; height: .65rem; border: 2px solid #334155; background: white; }
 .architecture-node__icon { display: grid; width: 2rem; height: 2rem; place-items: center; border-radius: 999px; background: #e0f2fe; color: #0c4a6e; font-size: 1.2rem; }
@@ -26,9 +37,12 @@
 .architecture-node__name, .architecture-node__layer { display: block; }
 .architecture-node__name { font-weight: 700; }
 .architecture-node__layer { margin-top: .15rem; color: #475569; font-size: .8rem; text-transform: capitalize; }
+.stale-marker { display: block; margin-top: .25rem; font-size: .7rem; font-weight: 700; }
 .architecture-edge .react-flow__edge-path { stroke: #334155; stroke-width: 2.5; }
 .architecture-edge--inferred .react-flow__edge-path { stroke-dasharray: 8 5; }
 .architecture-edge--speculative .react-flow__edge-path, .architecture-edge--unverified .react-flow__edge-path { stroke-dasharray: 2 5; }
+.architecture-edge--dimmed { opacity: .2; }
+.architecture-edge--active .react-flow__edge-path { stroke-width: 4; }
 .react-flow__edge-text { font-size: .7rem; fill: #0f172a; }
 .react-flow__edge-textbg { fill: #f8fafc; }
 .diagram-detail { padding: 1rem; border: 1px solid #cbd5e1; border-radius: .5rem; background: white; }
@@ -44,6 +58,7 @@
 .claim-status { display: inline-block; border: 2px solid #334155; border-radius: .2rem; padding: .05rem .3rem; font-size: .75rem; font-weight: 700; text-transform: capitalize; }
 .claim-status--inferred { border-style: dashed; }
 .claim-status--speculative { border-style: dotted; }
+.stale-badge { display: inline-block; margin-left: .35rem; border: 1px solid #334155; border-radius: .2rem; padding: .05rem .3rem; font-size: .75rem; font-weight: 700; }
 .claim-sources { margin-top: .35rem; }
 @media (min-width: 960px) { .diagram-and-panel { grid-template-columns: minmax(0, 1fr) minmax(20rem, 26rem); } .diagram-detail { max-height: 38rem; overflow: auto; } }
 @media (max-width: 640px) { .diagram-canvas { min-height: 30rem; } }

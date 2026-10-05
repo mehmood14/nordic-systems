@@ -1,0 +1,21 @@
+company: example-co
+title: "Fictional demo scenario: example order walkthrough"
+steps:
+  - component: example-co-web-client
+    flow: example-co-web-to-api
+    text: "Fictional demo step: Example Web Client sends an example request to Example Public API."
+  - component: example-co-public-api
+    flow: example-co-api-to-cache
+    text: "Fictional demo step: Example Public API checks Example Response Cache for an example response."
+  - component: example-co-order-service
+    flow: example-co-api-to-service
+    text: "Fictional demo step: Example Public API delegates an example order command to Example Order Service."
+  - component: example-co-order-store
+    flow: example-co-service-to-store
+    text: "Fictional demo step: Example Order Service writes an example order record to Example Order Store."
+  - component: example-co-event-queue
+    flow: example-co-service-to-queue
+    text: "Fictional demo step: Example Order Service emits an example event through Example Event Queue."
+  - component: example-co-telemetry
+    flow: example-co-service-to-telemetry
+    text: "Fictional demo step: Example Order Service sends a fictional operational signal to Example Telemetry."

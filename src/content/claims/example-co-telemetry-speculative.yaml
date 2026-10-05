@@ -2,5 +2,5 @@ component: example-co-telemetry
 statement: "Fictional demo claim: Example Telemetry may receive operational signals from Example Order Service."
 status: speculative
 confidence: low
-asOf: "2026-03"
+asOf: "2022-01"
 rationale: "Fictional demo speculation used to demonstrate a speculative-only component."
