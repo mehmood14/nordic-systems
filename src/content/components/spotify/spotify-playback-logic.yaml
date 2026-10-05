@@ -1,0 +1,5 @@
+company: spotify
+name: Player / playback logic
+layer: frontend
+summary: "A shared client module sequences tracks and handles shuffle and repeat behavior."
+why: "Playback sequencing keeps playlist and track progression consistent within the client."

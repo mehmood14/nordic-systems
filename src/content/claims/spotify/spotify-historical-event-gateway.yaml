@@ -1,0 +1,7 @@
+component: spotify-event-gateway
+statement: "In the 2016 event-delivery architecture, client events were sent to gateways, logged, and assigned a server-side timestamp. This is a historical design description."
+status: documented
+confidence: high
+asOf: "2016-02"
+sources:
+  - spotify-event-delivery-part-i

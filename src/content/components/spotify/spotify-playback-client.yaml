@@ -1,0 +1,5 @@
+company: spotify
+name: Spotify client
+layer: frontend
+summary: "Spotify apps initiate listening sessions and request audio from remote HTTP servers."
+why: "The client is the listener-facing entry point for playback across devices."

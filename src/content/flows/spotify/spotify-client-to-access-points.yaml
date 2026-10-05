@@ -1,0 +1,6 @@
+from: spotify-playback-client
+to: spotify-access-points
+data: "Client request to backend (general documented route, not a complete playback trace)"
+mode: sync
+claims:
+  - spotify-access-point-routing

@@ -1,0 +1,5 @@
+company: spotify
+name: Access points
+layer: infrastructure
+summary: "A documented client-facing backend entry point that forwards requests to other servers."
+why: "Access points provide a common route from clients into backend services."

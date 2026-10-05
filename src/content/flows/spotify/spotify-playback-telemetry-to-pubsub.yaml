@@ -1,0 +1,6 @@
+from: spotify-playback-telemetry
+to: spotify-event-transport
+data: "Possible playback-quality event delivery; instrumentation path is not documented"
+mode: async
+claims:
+  - spotify-playback-quality-event-path

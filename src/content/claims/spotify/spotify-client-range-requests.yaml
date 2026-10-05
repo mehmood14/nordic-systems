@@ -1,0 +1,7 @@
+component: spotify-playback-client
+statement: "Spotify documents HTTP GET range requests for chunked audio downloads, with 512 KB described as a typical chunk size."
+status: documented
+confidence: high
+asOf: "2018-08"
+sources:
+  - spotify-smoother-streaming-bbr

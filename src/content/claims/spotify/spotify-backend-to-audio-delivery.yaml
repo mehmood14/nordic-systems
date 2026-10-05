@@ -1,0 +1,9 @@
+component: spotify-backend-services
+statement: "A backend service or authorization step may help prepare or authorize the client's audio-delivery request."
+status: inferred
+confidence: low
+asOf: "2020-02"
+rationale: "Spotify documents backend playback services and token identification at CDN edges, but the cited material does not establish a specific backend-to-CDN authorization handshake or request-generation path."
+sources:
+  - spotify-player-api
+  - spotify-cdn-alignment

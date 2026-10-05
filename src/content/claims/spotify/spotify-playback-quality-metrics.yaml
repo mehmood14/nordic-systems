@@ -1,0 +1,7 @@
+component: spotify-playback-telemetry
+statement: "Spotify identified playback latency and stutter as primary playback-quality metrics and also reported measuring bandwidth during audio downloads."
+status: documented
+confidence: high
+asOf: "2018-08"
+sources:
+  - spotify-smoother-streaming-bbr

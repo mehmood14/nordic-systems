@@ -1,0 +1,7 @@
+component: spotify-access-points
+statement: "Spotify describes most clients connecting to the backend through an access point, which forwards requests to other servers."
+status: documented
+confidence: high
+asOf: "2015-12"
+sources:
+  - spotify-els-latency-load-balancer

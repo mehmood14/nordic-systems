@@ -1,0 +1,5 @@
+company: spotify
+name: Web Playback
+layer: frontend
+summary: "Spotify's browser player uses HTML5 media technologies; the Web Playback SDK can create and control a player in a browser."
+why: "Browser-native playback provides a web-based listening client."

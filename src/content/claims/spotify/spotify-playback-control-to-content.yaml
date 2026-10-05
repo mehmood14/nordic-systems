@@ -1,0 +1,9 @@
+component: spotify-player-api
+statement: "A playback command ultimately leads a Spotify client to request the selected audio content."
+status: inferred
+confidence: medium
+asOf: "2022-04"
+rationale: "Spotify separately documents Player API playback commands and client-side HTTP range requests for audio. The internal service sequence connecting a command to a specific audio request is not documented in these sources."
+sources:
+  - spotify-player-api
+  - spotify-smoother-streaming-bbr

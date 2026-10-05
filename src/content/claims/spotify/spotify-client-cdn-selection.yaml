@@ -1,0 +1,9 @@
+component: spotify-playback-client
+statement: "The client reaches an appropriate CDN or HTTP server for audio delivery."
+status: inferred
+confidence: medium
+asOf: "2020-02"
+rationale: "Spotify documents clients fetching audio from nearby HTTP servers and describes CDN delivery, but these sources do not specify the current algorithm or control plane that selects a particular endpoint."
+sources:
+  - spotify-smoother-streaming-bbr
+  - spotify-cdn-alignment

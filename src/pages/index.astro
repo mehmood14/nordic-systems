@@ -1,180 +1,309 @@
-```astro
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { getVisibleCompanies } from '../lib/content';
+import { logoFor } from '../lib/logo';
 
-const companies = getVisibleCompanies();
+const companies = getVisibleCompanies().map((company) => ({
+  ...company,
+  logoSrc: logoFor(company),
+}));
+
+// The three evidence levels, drawn with the same line styles the diagrams use.
+const statuses = [
+  { key: 'documented', label: 'Documented', text: 'Supported by public sources.', dash: undefined },
+  { key: 'inferred', label: 'Inferred', text: 'Reasoned from evidence, with the rationale stated.', dash: '7 5' },
+  { key: 'speculative', label: 'Speculative', text: 'A possibility, not a fact.', dash: '0.1 5' },
+];
+
+const linkClass =
+  'font-medium text-slate-900 underline decoration-slate-300 underline-offset-4 transition-colors hover:decoration-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700';
+const logoInitials = (name: string) => {
+  const words = name.match(/[A-Z]?[a-z]+|[A-Z]+(?=[A-Z]|$)|\d+/g) ?? [name];
+  return (words.length > 1 ? `${words[0][0]}${words[1][0]}` : words[0].slice(0, 2)).toUpperCase();
+};
 ---
 
 <SiteLayout
   title="Nordic Systems | Source-backed architecture maps"
   description="Original, provenance-aware architecture maps of Nordic technology companies."
 >
-  <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+  <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
 
     <!-- Hero -->
-    <div class="max-w-3xl">
-      <p class="text-sm font-semibold tracking-wide text-slate-700">
-        Nordic Systems
-      </p>
+    <div class="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
 
-      <h1 class="mt-3 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-        Architecture maps that show what is documented, inferred, and unknown.
-      </h1>
+      <div>
+        <h1 class="max-w-xl text-4xl font-semibold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl">
+          Architecture maps that show what is documented, inferred, and unknown.
+        </h1>
 
-      <p class="mt-5 text-lg leading-8 text-slate-700">
-        We reconstruct software architecture from public evidence, keeping
-        facts, interpretation, and speculation visibly distinct.
-      </p>
+        <p class="mt-6 max-w-prose text-lg leading-8 text-slate-700">
+          We reconstruct software architecture from public evidence. Every
+          claim carries its sources and its date, and the line around it tells
+          you how far to trust it.
+        </p>
+
+        <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <a
+            href="#companies"
+            class="rounded-md bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700"
+          >
+            Browse companies
+          </a>
+          <a href="/methodology" class={`text-sm ${linkClass}`}>
+            How we label evidence
+          </a>
+        </div>
+      </div>
+
+      <!-- The drawing: the line style is the page's one memorable idea -->
+      <figure class="ns-sheet m-0 overflow-hidden rounded-lg border border-slate-300 bg-white">
+        <div
+          class="p-4 sm:p-6"
+          style="background-image: linear-gradient(to right, #e2e8f0 1px, transparent 1px), linear-gradient(to bottom, #e2e8f0 1px, transparent 1px); background-size: 24px 24px;"
+        >
+          <svg
+            viewBox="0 0 480 280"
+            class="h-auto w-full"
+            role="img"
+            aria-label="Illustrative diagram. A client connects to an API with a solid line. The API connects to a service with a solid line, to a data store with a dashed line, and to telemetry with a dotted line."
+          >
+            <defs>
+              <marker
+                id="ns-arrow"
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="7"
+                markerHeight="7"
+                orient="auto-start-reverse"
+              >
+                <path
+                  d="M1 1 L9 5 L1 9"
+                  fill="none"
+                  stroke="#0f172a"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </marker>
+            </defs>
+
+            <!-- Flows -->
+            <g fill="none" stroke="#0f172a" stroke-width="1.75" stroke-linecap="round" marker-end="url(#ns-arrow)">
+              <path data-status="documented" d="M128 150 H186" />
+              <path data-status="documented" d="M292 144 C322 144 322 62 350 62" />
+              <path data-status="inferred" stroke-dasharray="7 5" d="M292 150 H350" />
+              <path data-status="speculative" stroke-dasharray="0.1 5" d="M292 156 C322 156 322 238 350 238" />
+            </g>
+
+            <!-- Components -->
+            <g font-size="14" font-weight="500" fill="#0f172a" text-anchor="middle">
+              <g data-status="documented">
+                <rect x="24" y="128" width="104" height="44" rx="6" fill="#fff" stroke="#0f172a" stroke-width="1.75" />
+                <text x="76" y="155">Client</text>
+              </g>
+              <g data-status="documented">
+                <rect x="188" y="128" width="104" height="44" rx="6" fill="#fff" stroke="#0f172a" stroke-width="1.75" />
+                <text x="240" y="155">API</text>
+              </g>
+              <g data-status="documented">
+                <rect x="352" y="40" width="104" height="44" rx="6" fill="#fff" stroke="#0f172a" stroke-width="1.75" />
+                <text x="404" y="67">Service</text>
+              </g>
+              <g data-status="inferred">
+                <rect x="352" y="128" width="104" height="44" rx="6" fill="#fff" stroke="#0f172a" stroke-width="1.75" stroke-dasharray="7 5" />
+                <text x="404" y="155">Data store</text>
+              </g>
+              <g data-status="speculative">
+                <rect x="352" y="216" width="104" height="44" rx="6" fill="#fff" stroke="#0f172a" stroke-width="1.75" stroke-dasharray="0.1 5" stroke-linecap="round" />
+                <text x="404" y="243">Telemetry</text>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Legend: hover or focus a level to isolate its lines -->
+        <div class="grid gap-1 border-t border-slate-200 p-2 sm:grid-cols-3">
+          {statuses.map((s) => (
+            <button
+              type="button"
+              data-legend={s.key}
+              aria-label={`Highlight ${s.label.toLowerCase()} lines in the example`}
+              class="flex flex-col items-start gap-1.5 rounded-md p-3 text-left transition-colors hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-sky-700"
+            >
+              <svg width="44" height="8" viewBox="0 0 44 8" aria-hidden="true">
+                <line
+                  x1="2"
+                  y1="4"
+                  x2="42"
+                  y2="4"
+                  stroke="#0f172a"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-dasharray={s.dash}
+                />
+              </svg>
+              <span class="text-sm font-semibold text-slate-900">{s.label}</span>
+              <span class="text-xs leading-5 text-slate-600">{s.text}</span>
+            </button>
+          ))}
+        </div>
+
+        <figcaption class="border-t border-slate-200 bg-slate-50 px-4 py-2.5 text-xs text-slate-600">
+          Illustration only. These components are made up.
+        </figcaption>
+      </figure>
+
     </div>
 
-    <!-- Provenance -->
-    <section
-      class="mt-12 max-w-4xl"
-      aria-labelledby="provenance-heading"
-    >
-      <h2
-        id="provenance-heading"
-        class="text-2xl font-semibold text-slate-900"
-      >
-        Provenance first
-      </h2>
-
-      <dl class="mt-5 grid gap-4 sm:grid-cols-3">
-
-        <div class="rounded-lg border border-slate-200 bg-white p-5">
-          <dt class="font-semibold text-slate-900">
-            Documented
-          </dt>
-
-          <dd class="mt-2 text-sm leading-6 text-slate-600">
-            Supported by one or more public sources.
-          </dd>
-        </div>
-
-        <div class="rounded-lg border border-slate-200 bg-white p-5">
-          <dt class="font-semibold text-slate-900">
-            Inferred
-          </dt>
-
-          <dd class="mt-2 text-sm leading-6 text-slate-600">
-            A reasoned interpretation with its rationale stated.
-          </dd>
-        </div>
-
-        <div class="rounded-lg border border-slate-200 bg-white p-5">
-          <dt class="font-semibold text-slate-900">
-            Speculative
-          </dt>
-
-          <dd class="mt-2 text-sm leading-6 text-slate-600">
-            A clearly marked possibility, not a fact.
-          </dd>
-        </div>
-
-      </dl>
-    </section>
-
     <!-- Companies -->
-    <section
-      class="mt-14"
-      aria-labelledby="companies-heading"
-    >
-      <div class="flex items-end justify-between gap-4">
-
+    <section id="companies" class="mt-24 scroll-mt-8" aria-labelledby="companies-heading">
+      <div class="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
         <div>
-          <h2
-            id="companies-heading"
-            class="text-2xl font-semibold text-slate-900"
-          >
+          <h2 id="companies-heading" class="text-2xl font-semibold tracking-tight text-slate-900">
             Companies
           </h2>
-
-          <p class="mt-2 text-sm text-slate-600">
-            Explore architecture maps and their supporting sources.
+          <p class="mt-2 max-w-prose text-sm leading-6 text-slate-600">
+            Open a diagram to explore the architecture, or the source library to see the evidence behind it.
           </p>
         </div>
 
         {companies.length > 0 && (
-          <p class="text-sm text-slate-500">
-            {companies.length} companies
-          </p>
+          <div class="flex w-full flex-wrap items-center justify-between gap-3 sm:w-auto sm:justify-end">
+            <p id="company-count" class="text-sm text-slate-500" role="status" aria-live="polite">
+              {companies.length} {companies.length === 1 ? 'company' : 'companies'}
+            </p>
+            <label class="company-search">
+              <span class="sr-only">Search companies</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" /><path d="m16 16 5 5" /></svg>
+              <input id="company-search" type="search" placeholder="Search companies" autocomplete="off" aria-controls="company-list" />
+            </label>
+          </div>
         )}
-
       </div>
 
       {companies.length ? (
-        <ul class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-
+        <ul id="company-list" class="mt-8 grid gap-x-12 border-b border-slate-200 lg:grid-cols-2">
           {companies.map((company) => (
-            <li
-              class="group flex min-h-[220px] flex-col rounded-xl border border-slate-200 bg-white p-5 transition duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-md"
-            >
-
-              <!-- Logo -->
-              <div class="flex h-12 w-12 items-center justify-center rounded-lg border border-slate-200 bg-white">
-                {company.logo ? (
-                  <img
-                    src={company.logo}
-                    alt={`${company.displayName} logo`}
-                    class="h-8 w-8 object-contain"
-                    loading="lazy"
-                  />
+            <li class="flex gap-4 border-t border-slate-200 py-5" data-company-search={`${company.displayName} ${company.slug} ${company.shortDescription} ${company.stage}`}>
+              <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-slate-200 bg-white">
+                {company.logoSrc ? (
+                  <>
+                    <img
+                      src={company.logoSrc}
+                      alt=""
+                      width="24"
+                      height="24"
+                      class="h-6 w-6 object-contain"
+                      loading="lazy"
+                      data-company-logo
+                    />
+                    <span class="company-logo-fallback" aria-hidden="true" hidden>{logoInitials(company.displayName)}</span>
+                  </>
                 ) : (
-                  <span
-                    class="text-sm font-semibold text-slate-400"
-                    aria-hidden="true"
-                  >
-                    {company.displayName.charAt(0)}
+                  <span class="company-logo-fallback" aria-hidden="true">
+                    {logoInitials(company.displayName)}
                   </span>
                 )}
               </div>
 
-              <!-- Company information -->
-              <div class="mt-5 flex-1">
-
-                <h3 class="font-semibold text-slate-900">
+              <div class="min-w-0 flex-1">
+                <h3 class="flex flex-wrap items-center gap-x-2 font-semibold text-slate-900">
                   {company.displayName}
+                  <span class={`company-stage company-stage--${company.stage}`}>{company.stage}</span>
+                  {!company.published && (
+                    <span
+                      class="rounded border border-dashed border-slate-400 px-1.5 py-0.5 text-xs font-normal text-slate-500"
+                      title="Visible in development only"
+                    >
+                      Draft
+                    </span>
+                  )}
                 </h3>
 
-                <p class="mt-2 text-sm leading-6 text-slate-600">
+                <p class="mt-1 text-sm leading-6 text-slate-600">
                   {company.shortDescription}
                 </p>
 
+                <div class="mt-3 flex items-center gap-5 text-sm">
+                  <a class={linkClass} href={`/diagram/${company.slug}`}>Diagram</a>
+                  <a class={linkClass} href={`/sources/${company.slug}`}>Sources</a>
+                </div>
               </div>
-
-              <!-- Links -->
-              <div class="mt-6 flex items-center gap-4 text-sm">
-
-                <a
-                  class="font-medium text-slate-900 underline underline-offset-4 transition hover:text-slate-500"
-                  href={`/diagram/${company.slug}`}
-                >
-                  Diagram
-                </a>
-
-                <a
-                  class="font-medium text-slate-900 underline underline-offset-4 transition hover:text-slate-500"
-                  href={`/sources/${company.slug}`}
-                >
-                  Sources
-                </a>
-
-              </div>
-
             </li>
           ))}
-
         </ul>
+        <p id="company-no-results" class="mt-8 text-sm text-slate-600" role="status" hidden>No companies match your search.</p>
       ) : (
-        <div class="mt-6 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-8 text-center">
-          <p class="text-slate-700">
-            Our first company is coming soon.
+        <div class="mt-8 rounded-lg border border-dashed border-slate-400 bg-white p-8">
+          <p class="font-medium text-slate-900">The first company map is in progress.</p>
+          <p class="mt-1 text-sm text-slate-600">
+            Each map is published only once its claims and sources are in place.
           </p>
         </div>
       )}
-
     </section>
+
+    <!-- Closing note -->
+    <p class="mt-16 max-w-prose text-sm leading-6 text-slate-600">
+      Want to know how a claim earned its label?
+      <a class={linkClass} href="/methodology">Read the methodology.</a>
+    </p>
 
   </section>
 </SiteLayout>
+
+<script>
+  const searchInput = document.querySelector<HTMLInputElement>('#company-search');
+  const companyList = document.querySelector<HTMLUListElement>('#company-list');
+  const companyCount = document.querySelector<HTMLElement>('#company-count');
+  const noResults = document.querySelector<HTMLElement>('#company-no-results');
+
+  if (searchInput && companyList && companyCount && noResults) {
+    const companyItems = [...companyList.querySelectorAll<HTMLLIElement>('[data-company-search]')];
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      for (const item of companyItems) {
+        const matches = item.dataset.companySearch?.toLowerCase().includes(query) ?? false;
+        item.hidden = !matches;
+        if (matches) visibleCount += 1;
+      }
+
+      companyCount.textContent = `${visibleCount} ${visibleCount === 1 ? 'company' : 'companies'}`;
+      noResults.hidden = visibleCount > 0;
+    });
+  }
+
+  for (const logo of document.querySelectorAll<HTMLImageElement>('[data-company-logo]')) {
+    const showFallback = () => {
+      logo.hidden = true;
+      const fallback = logo.nextElementSibling;
+      if (fallback instanceof HTMLElement) fallback.hidden = false;
+    };
+
+    logo.addEventListener('error', showFallback);
+    if (logo.complete && logo.naturalWidth === 0) showFallback();
+  }
+</script>
+
+<style is:global>
+  .ns-sheet [data-status] {
+    transition: opacity 150ms ease;
+  }
+
+  .ns-sheet:has([data-legend="documented"]:is(:hover, :focus-visible)) [data-status]:not([data-status="documented"]),
+  .ns-sheet:has([data-legend="inferred"]:is(:hover, :focus-visible)) [data-status]:not([data-status="inferred"]),
+  .ns-sheet:has([data-legend="speculative"]:is(:hover, :focus-visible)) [data-status]:not([data-status="speculative"]) {
+    opacity: 0.18;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ns-sheet [data-status] {
+      transition: none;
+    }
+  }
+</style>

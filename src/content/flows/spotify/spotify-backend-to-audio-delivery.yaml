@@ -1,0 +1,6 @@
+from: spotify-backend-services
+to: spotify-audio-delivery
+data: "Possible authorization or delivery preparation step; exact handshake is unknown"
+mode: sync
+claims:
+  - spotify-backend-to-audio-delivery

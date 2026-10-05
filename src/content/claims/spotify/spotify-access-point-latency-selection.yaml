@@ -1,0 +1,8 @@
+component: spotify-access-points
+statement: "Access-point routing may use latency-aware backend selection, but the cited material does not establish that access points use Spotify's Expected Latency Selector."
+status: inferred
+confidence: low
+asOf: "2015-12"
+rationale: "Spotify documents access points forwarding requests and separately describes Expected Latency Selector for backend services. The sources do not explicitly connect that algorithm to access points, so this relationship remains uncertain."
+sources:
+  - spotify-els-latency-load-balancer

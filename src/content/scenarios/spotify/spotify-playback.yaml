@@ -1,0 +1,11 @@
+company: spotify
+title: "Playback: documented behavior and unknown routing"
+steps:
+  - component: spotify-player-api
+    flow: spotify-player-api-to-client
+    text: "Spotify documents API commands for starting, pausing, seeking, changing volume, and queueing playback. The internal route from a command to a player is not established by these sources."
+  - component: spotify-playback-client
+    flow: spotify-client-to-audio-delivery
+    text: "Spotify documents clients fetching audio in HTTP range chunks from nearby servers. The precise endpoint-selection mechanism is not public in the cited material."
+  - component: spotify-audio-delivery
+    text: "Spotify has described CDN-based audio delivery and historical provider arrangements. The provider history is not drawn as a current, ordered chain."

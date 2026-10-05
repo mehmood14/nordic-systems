@@ -1,0 +1,9 @@
+component: spotify-access-points
+statement: "Access points may route playback-related metadata or control requests to backend services."
+status: inferred
+confidence: medium
+asOf: "2022-04"
+rationale: "Spotify documents access points as a general client-to-backend routing layer and separately documents playback and metadata services. The sources do not provide a complete playback request graph or confirm which playback requests pass through access points."
+sources:
+  - spotify-els-latency-load-balancer
+  - spotify-player-api

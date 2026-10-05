@@ -1,0 +1,9 @@
+component: spotify-playback-telemetry
+statement: "Playback-quality measurements may be emitted through Spotify's event infrastructure."
+status: inferred
+confidence: low
+asOf: "2018-08"
+rationale: "Spotify documents client-generated events and separately documents playback latency, stutter, and bandwidth metrics, but does not specify the instrumentation and transport path for each quality metric."
+sources:
+  - spotify-event-delivery-part-i
+  - spotify-smoother-streaming-bbr

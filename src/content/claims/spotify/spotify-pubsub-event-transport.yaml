@@ -1,0 +1,8 @@
+component: spotify-event-transport
+statement: "Spotify described Google Cloud Pub/Sub as the transport for a redesigned event-delivery system and reported Pub/Sub play events in a 2020 use case."
+status: documented
+confidence: high
+asOf: "2020-09"
+sources:
+  - spotify-event-delivery-part-ii
+  - spotify-listening-together

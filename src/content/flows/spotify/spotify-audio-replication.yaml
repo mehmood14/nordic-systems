@@ -1,0 +1,6 @@
+from: spotify-encoded-audio
+to: spotify-audio-delivery
+data: "Encoded track files replicated to HTTP delivery servers"
+mode: async
+claims:
+  - spotify-encoded-audio-replication

@@ -1,0 +1,6 @@
+from: spotify-access-points
+to: spotify-metadata-proxy
+data: "Metadata request forwarded to a metadata-proxy machine"
+mode: sync
+claims:
+  - spotify-metadata-proxy

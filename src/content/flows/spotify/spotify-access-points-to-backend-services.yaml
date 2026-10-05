@@ -1,0 +1,6 @@
+from: spotify-access-points
+to: spotify-backend-services
+data: "Possible playback-related request routing; exact path is not published"
+mode: sync
+claims:
+  - spotify-access-point-to-playback-services

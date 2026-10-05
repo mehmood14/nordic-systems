@@ -1,0 +1,5 @@
+company: spotify
+name: Feature-owned backend services
+layer: service
+summary: "Spotify has described feature-oriented ownership spanning client functionality, real-time backend requests, and batch processing."
+why: "Feature-oriented ownership keeps the implementation and operational context for a feature together."

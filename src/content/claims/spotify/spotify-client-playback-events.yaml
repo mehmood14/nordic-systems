@@ -1,0 +1,7 @@
+component: spotify-playback-telemetry
+statement: "Spotify described client actions such as listening to a song generating events sent to Spotify servers."
+status: documented
+confidence: high
+asOf: "2016-02"
+sources:
+  - spotify-event-delivery-part-i

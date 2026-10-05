@@ -1,0 +1,7 @@
+component: spotify-audio-delivery
+statement: "Spotify described using Fastly VCL for edge caching, request handling, and token identification."
+status: documented
+confidence: high
+asOf: "2020-02"
+sources:
+  - spotify-cdn-alignment

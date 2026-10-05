@@ -10,8 +10,11 @@ const layer = z.enum([
   'infrastructure', 'pipeline', 'monitoring', 'platform',
 ]);
 
+const preserveEntryId = ({ entry }: { entry: string }) =>
+  entry.slice(entry.lastIndexOf('/') + 1).replace(/\.yaml$/, '');
+
 const sources = defineCollection({
-  loader: glob({ pattern: '**/*.yaml', base: './src/content/sources' }),
+  loader: glob({ pattern: '**/*.yaml', base: './src/content/sources', generateId: preserveEntryId }),
   schema: z.object({
     company: z.string(),
     title: z.string(),
@@ -24,7 +27,7 @@ const sources = defineCollection({
 });
 
 const components = defineCollection({
-  loader: glob({ pattern: '**/*.yaml', base: './src/content/components' }),
+  loader: glob({ pattern: '**/*.yaml', base: './src/content/components', generateId: preserveEntryId }),
   schema: z.object({
     company: z.string(),
     name: z.string(),
@@ -35,7 +38,7 @@ const components = defineCollection({
 });
 
 const claims = defineCollection({
-  loader: glob({ pattern: '**/*.yaml', base: './src/content/claims' }),
+  loader: glob({ pattern: '**/*.yaml', base: './src/content/claims', generateId: preserveEntryId }),
   schema: z
     .object({
       component: reference('components'),
@@ -59,7 +62,7 @@ const claims = defineCollection({
 });
 
 const flows = defineCollection({
-  loader: glob({ pattern: '**/*.yaml', base: './src/content/flows' }),
+  loader: glob({ pattern: '**/*.yaml', base: './src/content/flows', generateId: preserveEntryId }),
   schema: z.object({
     from: reference('components'),
     to: reference('components'),
@@ -71,7 +74,7 @@ const flows = defineCollection({
 });
 
 const scenarios = defineCollection({
-  loader: glob({ pattern: '**/*.yaml', base: './src/content/scenarios' }),
+  loader: glob({ pattern: '**/*.yaml', base: './src/content/scenarios', generateId: preserveEntryId }),
   schema: z.object({
     company: z.string(),
     title: z.string(),

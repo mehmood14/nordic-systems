@@ -1,0 +1,7 @@
+component: spotify-playback-client
+statement: "Spotify apps fetch encoded audio in chunks from nearby HTTP servers when a listener plays a song."
+status: documented
+confidence: high
+asOf: "2018-08"
+sources:
+  - spotify-smoother-streaming-bbr

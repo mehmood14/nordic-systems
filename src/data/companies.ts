@@ -1,13 +1,27 @@
+export type CompanyStage = 'startup' | 'scaleup' | 'established';
+
 export interface Company {
   slug: string;
   displayName: string;
   shortDescription: string;
+  logo?: string;
   published: boolean;
+  stage: CompanyStage;
 }
 
+const companyStages = {
+  startup: `anocca berget-ai blykalla doconomy dokku elain endra functionland humy ipify karma kovant legora lightbringer lovable millow moleculent novatron-fusion reselo segr smartcella stilla tandem-health tavion tiptapp validio whywaste`,
+  scaleup: `acast aira airmee albacross alight anyfin bannerflow billogram bitrefill bokio booli brite-payments candela climeon cloudworks detectify doctrin doktor-se einride elonroad embark-studios embla epidemic-sound evroc firstvet froda funnel getaccept ingrid instabee iron-gate-studio jobylon juni kivra kognity kry lassie lifesum liquid-wind lunar magma magma-math mathem matsmart mavenoid mediatool mentimeter messente mestro mindler monitor-erp mynt na-kd natural-cycles neko-health neo4j normative northmill northvolt olink open-pay patchworks planacy planhat polarium position-green qasa qred quartr quinyx qvantum rebtel sana-ai scrive sellpy seon stegra stravito strossle stunlock-studios syre talentech teamtailor telness-tech teragence unomaly upsales vercel-sweden voi voyado xensam xvivo zimpler`,
+  established: `alltid-oppet apotea aprea-therapeutics arrowhead-game-studios assessio avalanche-studios avanza axis-communications bambora bankid bhg-group bico bioarctic blocket boozt byredo camurus cdon cellink cint clavister coffee-stain-studios desenio ea-dice efficy embracer ericsson etraveli evolution fatshark formpipe fortnox g5-entertainment hacksaw-gaming hazelight-studios hemnet hexagon hms-networks huawei-sweden iar-systems ifs king koenigsegg klarna lendo lime-technologies machinegames massive-entertainment mio modern-times-group mojang netent nordnet oatly optimizely outpost24 pagero paradox-interactive plejd polestar pricerunner qlik qliro questback raysearch recorded-future resurs revolutionrace saab scania sectra sinch skandia snow-software soundtrap spotify spotify-for-artists starbreeze stillfront storytel superoffice svea-bank swish syncron talentsoft tarsier-studios telavox tele2 telenor-sweden telia thunderful tink tobii tobii-dynavox too-good-to-go tradera truecaller trustly veoneer vitec voicetech volvo-cars volvo-group yubico zettle`,
+} satisfies Record<CompanyStage, string>;
 
+const companyStageBySlug = new Map<string, CompanyStage>(
+  Object.entries(companyStages).flatMap(([stage, slugs]) =>
+    slugs.split(' ').map((slug) => [slug, stage as CompanyStage] as const),
+  ),
+);
 
-export const companies: Company[] = [
+const companyEntries: Omit<Company, 'stage'>[] = [
   // ============================================================
   // CONSUMER / INTERNET
   // ============================================================
@@ -1231,4 +1245,100 @@ export const companies: Company[] = [
     shortDescription: 'Live casino and online gaming technology platform.',
     published: false,
   },
+
+    // ============================================================
+  // ADDITIONS: CONSUMER / MARKETPLACES / TRAVEL
+  // ============================================================
+
+  { slug: 'acast', displayName: 'Acast', shortDescription: 'Podcast hosting, distribution and advertising platform.', published: false },
+  { slug: 'sellpy', displayName: 'Sellpy', shortDescription: 'Second-hand fashion and resale marketplace.', published: false },
+  { slug: 'kivra', displayName: 'Kivra', shortDescription: 'Digital mailbox for letters, invoices, payslips and receipts.', published: false },
+  { slug: 'blocket', displayName: 'Blocket', shortDescription: 'Swedish online classifieds marketplace.', published: false }, // verify
+  { slug: 'pricerunner', displayName: 'PriceRunner', shortDescription: 'Price comparison and shopping platform.', published: false }, // verify
+  { slug: 'bhg-group', displayName: 'BHG Group', shortDescription: 'Online retail group focused on home improvement and furnishing.', published: false },
+  { slug: 'lifesum', displayName: 'Lifesum', shortDescription: 'Nutrition and health tracking app.', published: false },
+  { slug: 'etraveli', displayName: 'Etraveli Group', shortDescription: 'Flight booking technology platform powering online travel agencies.', published: false },
+
+  // ============================================================
+  // ADDITIONS: FINTECH / PAYMENTS / DIGITAL INFRASTRUCTURE
+  // ============================================================
+
+  { slug: 'doconomy', displayName: 'Doconomy', shortDescription: 'Climate-impact tracking and sustainable banking technology.', published: false },
+  { slug: 'brite-payments', displayName: 'Brite Payments', shortDescription: 'Pay-by-bank and open banking payments platform.', published: false },
+  { slug: 'froda', displayName: 'Froda', shortDescription: 'Financing platform for small businesses.', published: false },
+  { slug: 'svea-bank', displayName: 'Svea Bank', shortDescription: 'Financing, payments and debt collection services.', published: false },
+  { slug: 'resurs', displayName: 'Resurs', shortDescription: 'Consumer and business financing and payment solutions.', published: false },
+  { slug: 'pagero', displayName: 'Pagero', shortDescription: 'E-invoicing and business network platform.', published: false },
+  { slug: 'swish', displayName: 'Swish', shortDescription: 'Mobile payment service used across Sweden.', published: false },
+  { slug: 'bankid', displayName: 'BankID', shortDescription: 'Electronic identification and signing service used across Sweden.', published: false },
+  { slug: 'bitrefill', displayName: 'Bitrefill', shortDescription: 'Gift cards and mobile top-ups purchasable with cryptocurrency.', published: false },
+  { slug: 'rebtel', displayName: 'Rebtel', shortDescription: 'International calling and money transfer app.', published: false },
+  { slug: 'lendo', displayName: 'Lendo', shortDescription: 'Online loan comparison marketplace.', published: false }, // verify
+  { slug: 'zimpler', displayName: 'Zimpler', shortDescription: 'Online payments for e-commerce and digital services.', published: false }, // verify
+
+  // ============================================================
+  // ADDITIONS: SAAS / B2B SOFTWARE / SECURITY
+  // ============================================================
+
+  { slug: 'quinyx', displayName: 'Quinyx', shortDescription: 'Cloud workforce management software.', published: false },
+  { slug: 'lime-technologies', displayName: 'Lime Technologies', shortDescription: 'CRM software for Nordic B2B companies.', published: false },
+  { slug: 'ifs', displayName: 'IFS', shortDescription: 'Enterprise software for asset-intensive industries.', published: false },
+  { slug: 'sectra', displayName: 'Sectra', shortDescription: 'Medical imaging IT and cybersecurity solutions.', published: false },
+  { slug: 'vitec', displayName: 'Vitec Software Group', shortDescription: 'Vertical market software for niche industries.', published: false },
+  { slug: 'formpipe', displayName: 'Formpipe', shortDescription: 'Content services and process automation software.', published: false },
+  { slug: 'clavister', displayName: 'Clavister', shortDescription: 'Cybersecurity solutions for network protection.', published: false },
+  { slug: 'planhat', displayName: 'Planhat', shortDescription: 'Customer success platform for SaaS businesses.', published: false },
+  { slug: 'stravito', displayName: 'Stravito', shortDescription: 'Knowledge management platform for market insights teams.', published: false },
+  { slug: 'monitor-erp', displayName: 'Monitor ERP', shortDescription: 'ERP software for manufacturing companies.', published: false },
+  { slug: 'snow-software', displayName: 'Snow Software', shortDescription: 'Technology intelligence and IT asset management software.', published: false },
+  { slug: 'normative', displayName: 'Normative', shortDescription: 'Carbon accounting software for companies.', published: false },
+  { slug: 'mavenoid', displayName: 'Mavenoid', shortDescription: 'Product support and troubleshooting automation for hardware companies.', published: false },
+  { slug: 'iar-systems', displayName: 'IAR Systems', shortDescription: 'Embedded software development tools.', published: false }, // verify
+  { slug: 'outpost24', displayName: 'Outpost24', shortDescription: 'Cybersecurity and exposure management platform.', published: false }, // verify
+
+  // ============================================================
+  // ADDITIONS: AI
+  // ============================================================
+
+  { slug: 'validio', displayName: 'Validio', shortDescription: 'Data quality and observability platform.', published: false },
+  { slug: 'endra', displayName: 'Endra', shortDescription: 'AI platform for automating building systems design.', published: false },
+  { slug: 'kovant', displayName: 'Kovant', shortDescription: 'AI agent platform for enterprise operations.', published: false },
+  { slug: 'stilla', displayName: 'Stilla', shortDescription: 'AI assistant that tracks conversations, tasks and decisions.', published: false },
+  { slug: 'berget-ai', displayName: 'Berget AI', shortDescription: 'AI inference and agent infrastructure for open-source models.', published: false },
+
+  // ============================================================
+  // ADDITIONS: GAMING
+  // ============================================================
+
+  { slug: 'ea-dice', displayName: 'DICE', shortDescription: 'Game studio behind the Battlefield series, part of Electronic Arts.', published: false },
+  { slug: 'avalanche-studios', displayName: 'Avalanche Studios', shortDescription: 'Open-world game developer and publisher.', published: false },
+  { slug: 'hazelight-studios', displayName: 'Hazelight Studios', shortDescription: 'Game studio known for co-op adventure games.', published: false },
+  { slug: 'tarsier-studios', displayName: 'Tarsier Studios', shortDescription: 'Game development studio based in Malmö.', published: false },
+  { slug: 'thunderful', displayName: 'Thunderful Group', shortDescription: 'Games group spanning development, publishing and co-development.', published: false },
+  { slug: 'stillfront', displayName: 'Stillfront Group', shortDescription: 'Group of mobile and online game studios.', published: false },
+  { slug: 'embracer', displayName: 'Embracer Group', shortDescription: 'Games holding company with studios and IP across the industry.', published: false },
+  { slug: 'modern-times-group', displayName: 'Modern Times Group', shortDescription: 'Gaming and esports company.', published: false },
+  { slug: 'iron-gate-studio', displayName: 'Iron Gate Studio', shortDescription: 'Game studio behind Valheim.', published: false },
+  { slug: 'stunlock-studios', displayName: 'Stunlock Studios', shortDescription: 'Game studio behind V Rising.', published: false },
+  { slug: 'g5-entertainment', displayName: 'G5 Entertainment', shortDescription: 'Developer of free-to-play mobile games.', published: false },
+
+  // ============================================================
+  // ADDITIONS: HEALTH
+  // ============================================================
+
+  { slug: 'doctrin', displayName: 'Doctrin', shortDescription: 'Digital healthcare platform for care providers.', published: false },
+  { slug: 'firstvet', displayName: 'FirstVet', shortDescription: 'Video consultations with veterinarians.', published: false },
+
+  // ============================================================
+  // ADDITIONS: TELECOM / IOT
+  // ============================================================
+
+  { slug: 'telia', displayName: 'Telia Company', shortDescription: 'Telecommunications operator and digital services provider.', published: false }, // verify
+  { slug: 'axis-communications', displayName: 'Axis Communications', shortDescription: 'Network video, access control and audio technology company.', published: false }, // verify
 ];
+
+export const companies: Company[] = companyEntries.map((company) => {
+  const stage = companyStageBySlug.get(company.slug);
+  if (!stage) throw new Error(`No maturity stage assigned for ${company.slug}`);
+  return { ...company, stage };
+});

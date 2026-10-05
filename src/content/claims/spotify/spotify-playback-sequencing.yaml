@@ -1,0 +1,7 @@
+component: spotify-playback-logic
+statement: "A shared client module sequences tracks and handles shuffle, track repeat, and playlist repeat; the article distinguishes this from audio playback itself."
+status: documented
+confidence: high
+asOf: "2015-06"
+sources:
+  - spotify-rapid-check

@@ -60,5 +60,32 @@
 .claim-status--speculative { border-style: dotted; }
 .stale-badge { display: inline-block; margin-left: .35rem; border: 1px solid #334155; border-radius: .2rem; padding: .05rem .3rem; font-size: .75rem; font-weight: 700; }
 .claim-sources { margin-top: .35rem; }
+[data-theme="dark"] .scenario-panel,
+[data-theme="dark"] .diagram-detail { border-color: #39443e; background: #191f1d; color: #edf3ef; }
+[data-theme="dark"] .scenario-panel select,
+[data-theme="dark"] .scenario-actions button,
+[data-theme="dark"] .scenario-panel button,
+[data-theme="dark"] .diagram-detail__header button { border-color: #536158; background: #222a27; color: #edf3ef; }
+[data-theme="dark"] .diagram-canvas { border-color: #39443e; background: #141a17; }
+[data-theme="dark"] .architecture-node { border-color: #aab9b0; background: #191f1d; color: #edf3ef; }
+[data-theme="dark"] .architecture-node--active { outline-color: #edf3ef; }
+[data-theme="dark"] .architecture-node .react-flow__handle { border-color: #aab9b0; background: #222a27; }
+[data-theme="dark"] .architecture-node__layer,
+[data-theme="dark"] .claim-meta,
+[data-theme="dark"] .diagram-detail__eyebrow { color: #b4c2bb; }
+[data-theme="dark"] .architecture-edge .react-flow__edge-path { stroke: #aab9b0; }
+[data-theme="dark"] .react-flow__edge-text { fill: #edf3ef; }
+[data-theme="dark"] .react-flow__edge-textbg { fill: #141a17; }
+[data-theme="dark"] .react-flow__controls { border: 1px solid #39443e; box-shadow: none; }
+[data-theme="dark"] .react-flow__controls-button { border-color: #39443e; background: #222a27; fill: #edf3ef; }
+[data-theme="dark"] .react-flow__controls-button:hover { background: #303a34; }
+[data-theme="dark"] .react-flow__background pattern circle { fill: #39443e; }
 @media (min-width: 960px) { .diagram-and-panel { grid-template-columns: minmax(0, 1fr) minmax(20rem, 26rem); } .diagram-detail { max-height: 38rem; overflow: auto; } }
-@media (max-width: 640px) { .diagram-canvas { min-height: 30rem; } }
+@media (max-width: 640px) {
+	.diagram-shell, .diagram-toolbar, .scenario-panel, .diagram-and-panel, .diagram-canvas, .diagram-detail { min-width: 0; }
+	.diagram-toolbar { align-items: flex-start; }
+	.diagram-legend { width: 100%; min-width: 0; gap: .5rem .75rem; }
+	.diagram-legend span { min-width: 0; }
+	.scenario-panel select { width: 100%; max-width: 100%; }
+	.diagram-canvas { min-height: 30rem; }
+}

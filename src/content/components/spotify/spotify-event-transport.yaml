@@ -1,0 +1,5 @@
+company: spotify
+name: Google Cloud Pub/Sub (documented use)
+layer: queue
+summary: "Spotify documented Pub/Sub as the transport for an event-delivery redesign and described its use for asynchronous play events in 2020."
+why: "Asynchronous event transport lets downstream systems consume playback events."

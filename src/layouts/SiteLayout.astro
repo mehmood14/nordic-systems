@@ -23,6 +23,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <script is:inline>
+      const savedTheme = localStorage.getItem('nordic-theme');
+      const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = savedTheme || preferredTheme;
+    </script>
     <title>{title}</title>
   </head>
   <body class="bg-slate-50 text-slate-950">
@@ -30,15 +35,31 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <header class="border-b border-slate-200 bg-white">
       <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8" aria-label="Primary navigation">
         <a class="font-semibold" href="/">Nordic Systems</a>
-        <div class="flex gap-5 text-sm"><a href="/">Home</a><a href="/methodology">Methodology</a></div>
+        <div class="flex items-center gap-5 text-sm"><a href="/">Home</a><a href="/methodology">Methodology</a><button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false" title="Switch to dark theme"><svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" /></svg><svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z" /></svg></button></div>
       </nav>
     </header>
     <main id="main-content"><slot /></main>
     <footer class="mt-12 border-t border-slate-200 bg-white">
       <div class="mx-auto max-w-7xl px-4 py-6 text-sm text-slate-700 sm:px-6 lg:px-8">
         <p>Diagrams are original reconstructions based on public sources.</p>
-        <a href="https://github.com/your-org/nordic-systems" target="_blank" rel="noopener noreferrer">GitHub repository (placeholder)</a>
+        <a href="https://github.com/mehmood14/nordic-systems" target="_blank" rel="noopener noreferrer">GitHub repository</a>
       </div>
     </footer>
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('#theme-toggle');
+      const syncThemeToggle = () => {
+        const isDark = document.documentElement.dataset.theme === 'dark';
+        toggle?.setAttribute('aria-pressed', String(isDark));
+        toggle?.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} theme`);
+        toggle?.setAttribute('title', `Switch to ${isDark ? 'light' : 'dark'} theme`);
+      };
+      syncThemeToggle();
+      toggle?.addEventListener('click', () => {
+        const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = nextTheme;
+        localStorage.setItem('nordic-theme', nextTheme);
+        syncThemeToggle();
+      });
+    </script>
   </body>
 </html>

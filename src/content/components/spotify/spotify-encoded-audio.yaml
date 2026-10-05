@@ -1,0 +1,5 @@
+company: spotify
+name: Encoded audio files
+layer: data-store
+summary: "Spotify has described encoded tracks as files copied to HTTP servers around the world."
+why: "Replicated audio files support delivery to listeners from remote servers."

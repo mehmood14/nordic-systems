@@ -1,0 +1,8 @@
+component: spotify-audio-delivery
+statement: "Spotify documented using CDNs for music delivery to distant users and to meet audio bandwidth needs."
+status: documented
+confidence: high
+asOf: "2020-02"
+sources:
+  - spotify-sdn-internet-router
+  - spotify-cdn-alignment

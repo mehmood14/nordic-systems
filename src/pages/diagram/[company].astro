@@ -2,14 +2,94 @@
 import ArchitectureDiagram from '../../components/ArchitectureDiagram';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import { getCompanyDiagram, getVisibleCompanies } from '../../lib/content';
+import { logoFor } from '../../lib/logo';
 
-export function getStaticPaths() { return getVisibleCompanies().map((company) => ({ params: { company: company.slug } })); }
+export function getStaticPaths() {
+  return getVisibleCompanies().map((company) => ({ params: { company: company.slug } }));
+}
+
 const { company: companySlug } = Astro.params;
 const graph = companySlug ? await getCompanyDiagram(companySlug) : undefined;
 if (!graph) return Astro.redirect('/');
+
 const company = getVisibleCompanies().find((entry) => entry.slug === graph.company);
 const displayName = company?.displayName ?? graph.company;
+const logoSrc = company ? logoFor(company) : undefined;
+
+const linkClass =
+  'font-medium text-slate-900 underline decoration-slate-300 underline-offset-4 transition-colors hover:decoration-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700';
+const buttonClass =
+  'rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-900 transition-colors hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700';
+const primaryButtonClass =
+  'rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700';
 ---
-<SiteLayout title={`${displayName} architecture diagram | Nordic Systems`} description={`A provenance-aware architecture reconstruction for ${displayName}.`}>
-  <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8"><header class="mb-6 max-w-3xl"><p class="text-sm font-semibold tracking-wide text-slate-700">Nordic Systems</p><h1 class="mt-2 text-3xl font-semibold tracking-tight">{displayName} architecture</h1><p class="mt-3 text-slate-700">Line styles show the weakest provenance status attached to each component or flow. This page distinguishes documented facts from inference and speculation.</p><a class="mt-3 inline-block underline" href={`/sources/${graph.company}`}>View source library</a></header><ArchitectureDiagram client:only="react" graph={graph} /></section>
+
+<SiteLayout
+  title={`${displayName} architecture diagram | Nordic Systems`}
+  description={`A provenance-aware architecture reconstruction for ${displayName}.`}
+>
+  <section class="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+    <header class="diagram-page-header mb-8 border-b border-slate-200 pb-8">
+
+      <nav aria-label="Breadcrumb" class="text-sm text-slate-600">
+        <ol class="flex items-center gap-2">
+          <li><a class={linkClass} href="/#companies">Companies</a></li>
+          <li aria-hidden="true" class="text-slate-400">/</li>
+          <li aria-current="page" class="text-slate-700">{displayName}</li>
+        </ol>
+      </nav>
+
+      <div class="mt-6 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+
+        <div class="flex gap-4">
+          <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-md border border-slate-200 bg-white">
+            {logoSrc ? (
+              <img
+                src={logoSrc}
+                alt=""
+                width="32"
+                height="32"
+                class="h-8 w-8 object-contain"
+              />
+            ) : (
+              <span class="text-lg font-semibold text-slate-400" aria-hidden="true">
+                {displayName.charAt(0)}
+              </span>
+            )}
+          </div>
+
+          <div class="min-w-0">
+            <p class="page-kicker mb-2">Architecture map</p>
+            <h1 class="text-4xl font-semibold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl">
+              {displayName} architecture
+            </h1>
+            {company?.shortDescription && (
+              <p class="page-lead mt-4">{company.shortDescription}</p>
+            )}
+          </div>
+        </div>
+
+        <div class="flex shrink-0 flex-wrap items-center gap-3">
+          <a class={primaryButtonClass} href={`/sources/${graph.company}`}>Source library</a>
+          <a class={buttonClass} href="/methodology">Methodology</a>
+        </div>
+
+      </div>
+
+      <p class="evidence-intro mt-7 max-w-3xl border-l-2 border-emerald-700 bg-white px-4 py-3 text-sm leading-6 text-slate-700">
+        Solid edges are documented, dashed edges are inferred, and dotted edges are speculative.
+      </p>
+
+      {company && !company.published && (
+        <p class="draft-notice mt-4 max-w-3xl border border-dashed border-slate-400 bg-white px-4 py-3 text-sm text-slate-700">
+          <span class="font-medium text-slate-900">Draft.</span> This map is visible in development
+          only and is not published.
+        </p>
+      )}
+
+    </header>
+
+    <ArchitectureDiagram client:only="react" graph={graph} />
+
+  </section>
 </SiteLayout>

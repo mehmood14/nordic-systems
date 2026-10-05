@@ -1,0 +1,5 @@
+company: spotify
+name: CDN / HTTP audio delivery
+layer: infrastructure
+summary: "Spotify has documented CDN-based audio delivery and edge request handling; provider details here are historical snapshots, not a current provider chain."
+why: "Distributed delivery brings audio closer to listeners and supports high-bandwidth streaming."

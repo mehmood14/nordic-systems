@@ -1,0 +1,6 @@
+from: spotify-playback-client
+to: spotify-event-gateway
+data: "Client-generated event (historical 2016 design)"
+mode: async
+claims:
+  - spotify-historical-event-gateway

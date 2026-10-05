@@ -1,0 +1,6 @@
+from: spotify-player-api
+to: spotify-playback-client
+data: "Playback command to a selected Spotify device; internal routing is not documented here"
+mode: sync
+claims:
+  - spotify-playback-control-to-content

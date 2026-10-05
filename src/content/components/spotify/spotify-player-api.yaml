@@ -1,0 +1,5 @@
+company: spotify
+name: Player API
+layer: api
+summary: "Spotify's public Player API exposes commands for playback, volume, seeking, and queueing tracks."
+why: "The API lets authorized apps control playback on supported Spotify devices."

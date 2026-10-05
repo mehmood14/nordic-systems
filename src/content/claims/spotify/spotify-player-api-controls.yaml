@@ -1,0 +1,7 @@
+component: spotify-player-api
+statement: "Spotify's Player API documents endpoints for starting and pausing playback, changing volume, seeking, and adding items to the queue."
+status: documented
+confidence: high
+asOf: "2022-04"
+sources:
+  - spotify-player-api

@@ -1,0 +1,5 @@
+company: spotify
+name: Metadata Proxy (historical)
+layer: service
+summary: "A metadata proxy appears as a backend destination in Spotify's 2015 access-point load-balancing example."
+why: "It served metadata requests routed through the access-point layer in that documented example."

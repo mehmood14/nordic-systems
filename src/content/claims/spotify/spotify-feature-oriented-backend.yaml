@@ -1,0 +1,7 @@
+component: spotify-backend-services
+statement: "Spotify described feature-oriented teams owning functionality across clients, real-time backend requests, and batch data processing."
+status: documented
+confidence: high
+asOf: "2013-03"
+sources:
+  - spotify-backend-infrastructure

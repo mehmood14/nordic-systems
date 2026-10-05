@@ -1,0 +1,8 @@
+component: spotify-web-playback
+statement: "Spotify described its Web Player as HTML5-based and using Encrypted Media Extensions; the Web Playback SDK was described as a JavaScript SDK for creating and controlling a browser player."
+status: documented
+confidence: high
+asOf: "2022-04"
+sources:
+  - spotify-new-web-player
+  - spotify-player-api

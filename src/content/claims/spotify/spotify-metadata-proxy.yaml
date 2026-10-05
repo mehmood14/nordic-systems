@@ -1,0 +1,7 @@
+component: spotify-metadata-proxy
+statement: "Spotify's access-point example routes metadata-proxy requests to one of several metadata-proxy machines."
+status: documented
+confidence: high
+asOf: "2015-12"
+sources:
+  - spotify-els-latency-load-balancer

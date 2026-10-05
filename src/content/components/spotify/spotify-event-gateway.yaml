@@ -1,0 +1,5 @@
+company: spotify
+name: Event gateway (historical)
+layer: infrastructure
+summary: "Spotify's 2016 event-delivery article describes client events sent to gateways, logged, and timestamped."
+why: "This node records the documented earlier event-ingestion path and is not asserted as current."

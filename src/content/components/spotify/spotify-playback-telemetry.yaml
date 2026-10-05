@@ -1,0 +1,5 @@
+company: spotify
+name: Playback quality telemetry
+layer: monitoring
+summary: "Spotify has reported tracking playback latency, stutter, and download bandwidth."
+why: "These measurements describe user-perceived playback quality and streaming performance."

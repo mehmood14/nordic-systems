@@ -1,0 +1,7 @@
+component: spotify-encoded-audio
+statement: "Spotify described encoded music tracks as files copied onto HTTP servers around the world."
+status: documented
+confidence: high
+asOf: "2018-08"
+sources:
+  - spotify-smoother-streaming-bbr

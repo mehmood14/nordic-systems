@@ -1,0 +1,7 @@
+component: spotify-audio-delivery
+statement: "In its 2020 account, Spotify described Akamai and AWS for business-critical audio delivery and Fastly in its broader CDN standardization work; this is a dated account, not a current provider chain."
+status: documented
+confidence: high
+asOf: "2020-02"
+sources:
+  - spotify-cdn-alignment

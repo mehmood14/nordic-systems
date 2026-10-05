@@ -1,0 +1,6 @@
+from: spotify-playback-client
+to: spotify-audio-delivery
+data: "Chunked audio request to a nearby HTTP server or CDN; endpoint selection details are unknown"
+mode: sync
+claims:
+  - spotify-client-cdn-selection
